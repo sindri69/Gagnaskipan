@@ -2,27 +2,64 @@
 
 CharacterArray::CharacterArray()
 {
-    ///TODO: Implement
+    char* arr;
+    arr = new char[INITIAL_CAPACITY + 1];
+    NULL = '\0';
+    size = 0;
+    capacity = INITIAL_CAPACITY;
 }
 
 CharacterArray::CharacterArray(char* str, int length)
 {
-    ///TODO: Implement
+    capacity = INITIAL_CAPACITY;
+    while(length > capacity) {
+        capacity *= 2;
+    }
+    capacity += 1;
+    size = length;
+
+    char *arr;
+    arr = new char[capacity];
+
+    for(int i=0; i < size; i++) {
+        arr[i] = str[i];
+    }
+    arr[size] = NULL;
 }
 
 CharacterArray::~CharacterArray()
 {
-    ///TODO: Implement
+    delete[] arr;
+    delete[] str;
 }
 
-void CharacterArray::append(char c) {
-
-    ///TODO: Implement
+void CharacterArray::append(char c) { //1 parameter?
+    arr[size] = c;
+    size += 1;
+    arr[size] = NULL;
 }
 
 void CharacterArray::insert(char c, int index) {
+    size += 1;
+    if(size > capacity) {
+        capacity *= 2;
+    }
 
-    ///TODO: Implement
+    if (index = size-1) {
+        arr[size] = c;
+        size += 1;
+        arr[size] = NULL;
+        }
+    else {
+        for(int i=size-1; i >= 0; i--) {
+            if(i == index) {
+                arr[i] = c;
+        }
+            else if(i > index) {
+                arr[i] = arr[i+1];
+            }
+        }
+    }
 }
 
 void CharacterArray::setAt(char c, int index) {
@@ -80,4 +117,9 @@ ostream& operator <<(ostream& out, const CharacterArray& ca) {
 
     ///TODO: Implement
     return out; //change or remove this line
+}
+
+
+void reallocate_memmory(){
+
 }
